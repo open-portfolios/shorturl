@@ -24,6 +24,8 @@ tasks:
     desc: Generate code using goctl
     cmds:
       - goctl api go -api shorturl.api -dir .
+      - mkdir -p internal/model
+      - goctl model mysql ddl -s "sql/*.sql" --dir "internal/model"
     silent: true
 
   up:
