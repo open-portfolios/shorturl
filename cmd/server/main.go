@@ -6,16 +6,25 @@ package main
 import (
 	"flag"
 	"fmt"
+	"os"
+	"os/signal"
 
 	"github.com/cylixlee/shorturl/internal/config"
 	"github.com/cylixlee/shorturl/internal/handler"
 	"github.com/cylixlee/shorturl/internal/svc"
+	dotenv "github.com/joho/godotenv"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"
 )
 
 var configFile = flag.String("f", "etc/shorturl-api.yaml", "the config file")
+
+func init() {
+	if err := dotenv.Load(); err != nil {
+		panic(err)
+	}
+}
 
 func main() {
 	flag.Parse()
@@ -29,6 +38,13 @@ func main() {
 	ctx := svc.NewServiceContext(c)
 	handler.RegisterHandlers(server, ctx)
 
-	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
-	server.Start()
+	// Add graceful shutdown
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, os.Interrupt)
+	go func() {
+		fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
+		server.Start()
+	}()
+	<-quit
+	server.Stop()
 }

@@ -32,8 +32,12 @@ tasks:
     desc: Generate code using goctl
     cmds:
       - goctl api go -api shorturl.api -dir .
-      - mkdir -p cmd/server
-      - cp shorturl.go cmd/server/main.go
+      - |
+        if [ -f cmd/server/main.go ]; then
+          exit 0
+        fi
+        mkdir -p cmd/server
+        cp shorturl.go cmd/server/main.go
       - rm shorturl.go
       - mkdir -p internal/model
       - goctl model mysql ddl -s "sql/*.sql" --dir "internal/model"

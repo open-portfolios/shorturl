@@ -7,4 +7,14 @@ import "github.com/zeromicro/go-zero/rest"
 
 type Config struct {
 	rest.RestConf
+
+	Mysql struct {
+		User         string
+		Host         string
+		Port         int
+		DatabaseName string
+		Charset      string
+		ParseTime    bool
+		Locale       string
+	}
 }

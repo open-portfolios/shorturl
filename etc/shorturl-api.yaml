@@ -1,3 +1,12 @@
 Name: shorturl-api
 Host: 0.0.0.0
 Port: 8888
+
+Mysql:
+  User: root
+  Host: 127.0.0.1
+  Port: 3306
+  DatabaseName: shorturl
+  Charset: utf8
+  ParseTime: true
+  Locale: Local
