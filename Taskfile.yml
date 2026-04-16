@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: "3"
+
+dotenv: [".env"]
+
+vars:
+  CONTAINER_ENGINE:
+    sh: |
+      if command -v docker > /dev/null 2>&1; then
+        echo "docker"
+      elif command -v podman > /dev/null 2>&1; then
+        echo "podman"
+      else
+        exit 1 # No supported container engine found
+      fi
+
+tasks:
+  up:
+    desc: Pull up containers
+    deps:
+      - podman-machine-start
+    cmd: "{{.CONTAINER_ENGINE}} compose up -d"
+    silent: true
+
+  down:
+    desc: Shut down containers
+    cmd: "{{.CONTAINER_ENGINE}} compose down > /dev/null 2>&1"
+    silent: true
+
+  database:
+    desc: Connect to database CLI
+    deps:
+      - up
+    cmd: "{{.CONTAINER_ENGINE}} exec -it shorturl-mysql mysql -u root -p${MYSQL_ROOT_PASSWORD}"
+    interactive: true
+    silent: true
+
+  migrate:
+    desc: Migrate database
+    deps:
+      - up
+    cmd: |
+      for sql in sql/*.sql; do
+        {{.CONTAINER_ENGINE}} exec -i shorturl-mysql mysql -u root -p${MYSQL_ROOT_PASSWORD} < $sql
+      done
+    silent: true
+
+  podman-machine-start:
+    desc: Start podman machine
+    internal: true
+    if: '{{eq .CONTAINER_ENGINE "podman"}}'
+    cmd: |
+      machinestate="$(podman machine info)"
+      machinestate=${machinestate##*machinestate:}
+      machinestate=${machinestate%%numberofmachines*}
+      case "$machinestate" in
+        *Running*)
+          exit 0 # Already running
+          ;;
+        *)
+          podman machine start
+          ;;
+      esac
+    silent: true
