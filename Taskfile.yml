@@ -25,13 +25,16 @@ tasks:
     deps:
       - up
     cmds:
-      - go run shorturl.go
+      - go run ./cmd/server
     silent: true
 
   generate:
     desc: Generate code using goctl
     cmds:
       - goctl api go -api shorturl.api -dir .
+      - mkdir -p cmd/server
+      - cp shorturl.go cmd/server/main.go
+      - rm shorturl.go
       - mkdir -p internal/model
       - goctl model mysql ddl -s "sql/*.sql" --dir "internal/model"
     silent: true
