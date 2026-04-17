@@ -17,4 +17,7 @@ type Config struct {
 		ParseTime    bool
 		Locale       string
 	}
+	EncodingBaseString string `json:",optional"`
+	Blacklist          string `json:",optional"`
+	ShortDomain        string
 }

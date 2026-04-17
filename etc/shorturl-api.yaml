@@ -13,3 +13,6 @@ Mysql:
   Charset: utf8
   ParseTime: true
   Locale: Local
+
+Blacklist: etc/blacklist.txt
+ShortDomain: localhost:8888

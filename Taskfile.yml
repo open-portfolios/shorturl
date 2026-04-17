@@ -2,7 +2,7 @@
 
 version: "3"
 
-dotenv: [".env"]
+dotenv: [ ".env" ]
 
 vars:
   CONTAINER_ENGINE:
@@ -15,9 +15,11 @@ vars:
         exit 1 # No supported container engine found
       fi
   MYSQL_COMMAND: >-
-    {{.CONTAINER_ENGINE}} exec -i shorturl-mysql mysql -h 127.0.0.1 -u root -p${MYSQL_ROOT_PASSWORD}
+    {{.CONTAINER_ENGINE}} exec -i shorturl-mysql mysql -h 127.0.0.1 -u root
+    -p${MYSQL_ROOT_PASSWORD}
   INTERACTIVE_MYSQL_COMMAND: >-
-    {{.CONTAINER_ENGINE}} exec -it shorturl-mysql mysql -h 127.0.0.1 -u root -p${MYSQL_ROOT_PASSWORD}
+    {{.CONTAINER_ENGINE}} exec -it shorturl-mysql mysql -h 127.0.0.1 -u root
+    -p${MYSQL_ROOT_PASSWORD}
 
 tasks:
   run:
@@ -88,7 +90,7 @@ tasks:
   podman-machine-start:
     desc: Start podman machine
     internal: true
-    if: '{{eq .CONTAINER_ENGINE "podman"}}'
+    if: "{{eq .CONTAINER_ENGINE \"podman\"}}"
     cmd: |
       machinestate="$(podman machine info)"
       machinestate=${machinestate##*machinestate:}
@@ -111,7 +113,7 @@ tasks:
 
   sleep-powershell:*:
     desc: Sleep N seconds in PowerShell
-    if: '{{eq OS "windows"}}'
+    if: "{{eq OS \"windows\"}}"
     internal: true
     cmds:
       - pwsh -c "sleep {{index .MATCH 0}}"
@@ -119,7 +121,7 @@ tasks:
 
   sleep-posix:*:
     desc: Sleep N seconds in POSIX Shell
-    if: '{{ne OS "windows"}}'
+    if: "{{ne OS \"windows\"}}"
     internal: true
     cmds:
       - sleep {{index .MATCH 0}}

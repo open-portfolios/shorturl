@@ -3,8 +3,10 @@ module github.com/cylixlee/shorturl
 go 1.26.2
 
 require (
+	github.com/cloudflare/ahocorasick v0.0.0-20240916140611-054963ec9396
 	github.com/go-playground/validator/v10 v10.30.2
 	github.com/joho/godotenv v1.5.1
+	github.com/jxskiss/base62 v1.1.0
 	github.com/zeromicro/go-zero v1.10.1
 )
 
