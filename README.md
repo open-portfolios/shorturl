@@ -1,6 +1,8 @@
 # Short URL
 A Go short URL service.
 
+![Architecture](./docs/architecture.svg)
+
 ## Prerequisites
 
 ### Container Engine
