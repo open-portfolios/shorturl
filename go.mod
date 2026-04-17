@@ -3,6 +3,7 @@ module github.com/cylixlee/shorturl
 go 1.26.2
 
 require (
+	github.com/go-playground/validator/v10 v10.30.2
 	github.com/joho/godotenv v1.5.1
 	github.com/zeromicro/go-zero v1.10.1
 )
@@ -13,8 +14,11 @@ require (
 	github.com/cenkalti/backoff/v5 v5.0.3 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/fatih/color v1.18.0 // indirect
+	github.com/gabriel-vasile/mimetype v1.4.13 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
+	github.com/go-playground/locales v0.14.1 // indirect
+	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-sql-driver/mysql v1.9.3 // indirect
 	github.com/golang-jwt/jwt/v4 v4.5.2 // indirect
 	github.com/google/uuid v1.6.0 // indirect
@@ -22,6 +26,7 @@ require (
 	github.com/grafana/pyroscope-go/godeltaprof v0.1.9 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.7 // indirect
 	github.com/klauspost/compress v1.18.0 // indirect
+	github.com/leodido/go-urn v1.4.0 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
@@ -46,9 +51,10 @@ require (
 	go.opentelemetry.io/proto/otlp v1.9.0 // indirect
 	go.uber.org/automaxprocs v1.6.0 // indirect
 	go.yaml.in/yaml/v2 v2.4.2 // indirect
-	golang.org/x/net v0.50.0 // indirect
-	golang.org/x/sys v0.41.0 // indirect
-	golang.org/x/text v0.34.0 // indirect
+	golang.org/x/crypto v0.49.0 // indirect
+	golang.org/x/net v0.51.0 // indirect
+	golang.org/x/sys v0.42.0 // indirect
+	golang.org/x/text v0.35.0 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20260128011058-8636f8732409 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20260128011058-8636f8732409 // indirect
 	google.golang.org/grpc v1.79.3 // indirect

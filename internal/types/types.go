@@ -4,14 +4,14 @@
 package types
 
 type RedirectRequest struct {
-	ShortURL string `path:"shortUrl"`
+	ShortURL string `path:"shortUrl" validate:"required"`
 }
 
 type RedirectResponse struct {
 }
 
 type ShortenRequest struct {
-	LongURL string `json:"longUrl"`
+	LongURL string `json:"longUrl" validate:"required"`
 }
 
 type ShortenResponse struct {

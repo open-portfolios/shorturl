@@ -1,12 +1,12 @@
 type (
 	ShortenRequest {
-		LongURL string `json:"longUrl"`
+		LongURL string `json:"longUrl" validate:"required"`
 	}
 	ShortenResponse {
 		ShortURL string `json:"shortUrl"`
 	}
 	RedirectRequest {
-		ShortURL string `path:"shortUrl"`
+		ShortURL string `path:"shortUrl" validate:"required"`
 	}
 	RedirectResponse  {}
 )

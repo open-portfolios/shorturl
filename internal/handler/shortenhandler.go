@@ -9,6 +9,7 @@ import (
 	"github.com/cylixlee/shorturl/internal/logic"
 	"github.com/cylixlee/shorturl/internal/svc"
 	"github.com/cylixlee/shorturl/internal/types"
+	"github.com/go-playground/validator/v10"
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
@@ -16,6 +17,10 @@ func ShortenHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.ShortenRequest
 		if err := httpx.Parse(r, &req); err != nil {
+			httpx.ErrorCtx(r.Context(), w, err)
+			return
+		}
+		if err := validator.New().StructCtx(r.Context(), &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
