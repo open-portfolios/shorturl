@@ -13,10 +13,12 @@ This project uses [Podman](https://podman.io) as the container engine, but any O
 [Taskfile](https://taskfile.dev) is introduced as an alternative to Makefile. Instead of typing a cluster of long long commands, you can use 
 
 - `task up` to compose up containers
+- `task migrate` to create tables, insert values from the SQL files under `sql/`
+- `task run` to run server
+- `task database` to connect to the interactive shell of the database in the container
+- `task cache` to connect to the interactive shell of the cache in the container
 - `task down` to shut down containers
 - `task clean` to shut down containers and **remove all data** (be careful!)
-- `task migrate` to create tables, insert values from the SQL files under `sql/`
-- `task database` to connect to the interactive shell of the database in the container
 
 Taskfile uses the YAML format, and you will find it familiar if you have read GitHub Actions workflows before.
 
